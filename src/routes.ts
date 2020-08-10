@@ -7,10 +7,6 @@ const routes = express.Router();
 const classesController = new ClassesController();
 const connectionsController = new ConnectionsController();
 
-routes.get("/users", (request, response) => {
-  response.status(401).json({ error: "hahahaha" });
-});
-
 routes.post("/classes", classesController.store);
 routes.get("/classes", classesController.index);
 
