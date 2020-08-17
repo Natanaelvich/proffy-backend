@@ -1,5 +1,5 @@
 # PROFFY BACKEND
-project in node js created in next level week rocketseat 💚🚀🔥
+your online study platform backend 💚🚀🔥
 
 <p align='center'>
 <img src='https://user-images.githubusercontent.com/52014318/89745069-b4fad900-da87-11ea-9e6d-7cac1d9dd633.png' height='400' />
