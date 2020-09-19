@@ -1,15 +1,10 @@
-import {
-  MigrationInterface,
-  QueryRunner,
-  Table,
-  TableForeignKey,
-} from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export default class CreateClasses1598785892062 implements MigrationInterface {
+export default class CreateUsers1598785892062 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'classes',
+        name: 'users',
         columns: [
           {
             name: 'id',
@@ -18,17 +13,30 @@ export default class CreateClasses1598785892062 implements MigrationInterface {
             generationStrategy: 'uuid',
           },
           {
-            name: 'user_id',
+            name: 'name',
+            type: 'varchar',
+          },
+          {
+            name: 'avatar',
             type: 'varchar',
             isNullable: true,
           },
           {
-            name: 'subject',
+            name: 'whatsapp',
             type: 'varchar',
           },
           {
-            name: 'cost',
-            type: 'int',
+            name: 'bio',
+            type: 'varchar',
+          },
+          {
+            name: 'email',
+            type: 'varchar',
+            isUnique: true,
+          },
+          {
+            name: 'password',
+            type: 'varchar',
           },
           {
             name: 'created_at',
@@ -43,21 +51,9 @@ export default class CreateClasses1598785892062 implements MigrationInterface {
         ],
       }),
     );
-
-    await queryRunner.createForeignKey(
-      'classes',
-      new TableForeignKey({
-        name: 'fk_classe_provider',
-        columnNames: ['user_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'users',
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
-      }),
-    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('classes');
+    await queryRunner.dropTable('users');
   }
 }

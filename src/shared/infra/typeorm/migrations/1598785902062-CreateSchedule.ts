@@ -5,11 +5,11 @@ import {
   TableForeignKey,
 } from 'typeorm';
 
-export default class CreateClasses1598785892062 implements MigrationInterface {
+export default class CreateSchedule1598785902062 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'classes',
+        name: 'schedules',
         columns: [
           {
             name: 'id',
@@ -18,16 +18,20 @@ export default class CreateClasses1598785892062 implements MigrationInterface {
             generationStrategy: 'uuid',
           },
           {
-            name: 'user_id',
+            name: 'week_day',
+            type: 'int',
+          },
+          {
+            name: 'from',
+            type: 'int',
+          },
+          {
+            name: 'class_id',
             type: 'varchar',
             isNullable: true,
           },
           {
-            name: 'subject',
-            type: 'varchar',
-          },
-          {
-            name: 'cost',
+            name: 'to',
             type: 'int',
           },
           {
@@ -45,12 +49,12 @@ export default class CreateClasses1598785892062 implements MigrationInterface {
     );
 
     await queryRunner.createForeignKey(
-      'classes',
+      'schedules',
       new TableForeignKey({
-        name: 'fk_classe_provider',
-        columnNames: ['user_id'],
+        name: 'fk_schedules_classe',
+        columnNames: ['class_id'],
         referencedColumnNames: ['id'],
-        referencedTableName: 'users',
+        referencedTableName: 'classes',
         onDelete: 'SET NULL',
         onUpdate: 'CASCADE',
       }),
@@ -58,6 +62,6 @@ export default class CreateClasses1598785892062 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('classes');
+    await queryRunner.dropTable('schedules');
   }
 }
