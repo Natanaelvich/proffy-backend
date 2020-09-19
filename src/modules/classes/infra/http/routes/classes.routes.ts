@@ -9,5 +9,6 @@ const classesRouter = Router();
 classesRouter.use(ensureAuthenticated);
 
 classesRouter.post('/', classesController.create);
+classesRouter.get('/', classesController.index);
 
 export default classesRouter;
